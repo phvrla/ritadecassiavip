@@ -61,10 +61,10 @@
     <script>
         (async function() {
             const CONFIG = {
-                                PRESSEL_ID: 419,
-                WHITE_PAGE_URL: "https://br.pinterest.com/pin/1125968708141605/",
+                                PRESSEL_ID: 656,
+                WHITE_PAGE_URL: "https://br.pinterest.com/beauty-pin/crb54trf--15481192463130631/",
                 BOT_USERNAME: "luisarodriguesvippbot",
-                API_BASE_URL: "https://www.hottrack.pro"
+                API_BASE_URL: "https://www.hot-track.com"
             };
             function getQueryParam(param) {
                 const urlParams = new URLSearchParams(window.location.search);
@@ -73,8 +73,13 @@
             function getCookie(name) {
                 const cookies = document.cookie.split('; ');
                 for (const cookie of cookies) {
-                    const parts = cookie.split('=');
-                    if (parts[0] === name) return parts[1];
+                    const equalIndex = cookie.indexOf('=');
+                    if (equalIndex === -1) continue;
+                    const cookieName = cookie.substring(0, equalIndex).trim();
+                    const cookieValue = cookie.substring(equalIndex + 1);
+                    if (cookieName === name) {
+                        return decodeURIComponent(cookieValue);
+                    }
                 }
                 return null;
             }
